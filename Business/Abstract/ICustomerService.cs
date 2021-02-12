@@ -6,10 +6,8 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IBrandService
+    public interface ICustomerService
     {
-        IDataResult<List<Brand>> GetCarsByBrandId(int id);
-        IResult Add(Brand brand);
-       
+        IDataResult<List<Customer>> GetAll();
     }
 }

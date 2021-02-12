@@ -13,37 +13,20 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
-
+            UserManager userManager = new UserManager(new EfUserDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             
-            foreach (var car in carManager.GetCarDetials())
+            foreach (var car in carManager.GetCarDetials().Data)
             {
                 Console.WriteLine(car.ColorName+"/"+car.BrandName);
             }
             
 
-            Console.WriteLine("-------MARKA İSMİ EKLEME------");
-            brandManager.Add(new Brand{BrandId=1,BrandName="Ford Focus" });
-
-            Console.WriteLine("--------ARABA RENGİ EKLEME------");
-            colorManager.Add(new Color { ColorId = 201, ColorName = "Turkuaz" });
-
-
-            Console.WriteLine("--------Tablo Getirme--------");
-            foreach (var car in carManager.GetAll())
+            foreach (var user in userManager.GetAll().Data)
             {
-                Console.Write(car.BrandId);
-                Console.Write(" ");
-                Console.Write(car.ColorId);
-                Console.Write(" ");
-                Console.Write(car.Descriptions);
-                Console.Write(" ");
-                Console.Write(car.ModelYears);
-                Console.Write(" ");
-                Console.Write(car.DailyPrice);
-                Console.WriteLine("--------------");
+                Console.WriteLine(user.FirstName+"/"+user.LastName);
             }
-          
-          
             
         }
     }
