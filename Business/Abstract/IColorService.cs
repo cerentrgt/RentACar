@@ -10,5 +10,6 @@ namespace Business.Abstract
     public interface IColorService
     {
        IDataResult<List<Color>> GetCarsByColorId(int id);
+       IResult Add(Color color);
     }
 }

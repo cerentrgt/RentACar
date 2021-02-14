@@ -17,17 +17,17 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        public IResult Add(Color color)
-        {
-            return new SuccessResult(Messages.ColorAdded);
-        }
-
+       
         
         public IDataResult<List<Color>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Color>>( _colorDal.GetAll(c=>c.ColorId==id));
         }
 
-        
+        public IResult Add(Color color)
+        {
+            _colorDal.Add(color);
+            return new SuccessResult(Messages.ColorAdded);
+        }
     }
 }
