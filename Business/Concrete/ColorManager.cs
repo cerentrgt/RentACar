@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -17,13 +18,14 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-       
-        
+
+ 
         public IDataResult<List<Color>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Color>>( _colorDal.GetAll(c=>c.ColorId==id));
         }
 
+        [ValidationAspect(typeof(ColorManager))]
         public IResult Add(Color color)
         {
             _colorDal.Add(color);

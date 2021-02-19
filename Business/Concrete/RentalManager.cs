@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,27 +20,32 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
+        [ValidationAspect(typeof(RentalManager))]
         public IResult Add(Rental rental)
         {
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
 
+        
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
             return new SuccessResult(Messages.RentalDeleted);
         }
 
+
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.CarListed);
         }
 
+
         public IDataResult<List<RentalDetailDto>> GetRentalDetailsDto()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(),Messages.CarListed);
         }
+
 
         public IResult Update(Rental rental)
         {

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,16 +20,18 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [ValidationAspect(typeof(CarManager))]
         public IResult Add(Car car)
         {
             return new  SuccessResult(Messages.CarAdded);
         }
-
+     
         public IResult Delete(Car car)
         {
             return new SuccessResult(Messages.CarDeleted);
         }
 
+ 
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour == 15)
@@ -38,16 +41,19 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarListed);
         }
 
+  
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
         }
+
 
         public IDataResult<List<CarDetailDto>> GetCarDetials()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetials());
         }
 
+ 
         public IResult Update(Car car)
         {
             return new SuccessResult(Messages.CarUpdated);
