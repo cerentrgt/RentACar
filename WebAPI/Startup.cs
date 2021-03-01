@@ -48,6 +48,7 @@ namespace WebAPI
             //services.AddSingleton<IColorDal, EfColorDal>();
             //services.AddSingleton<IBrandService, BrandManager>();
             //services.AddSingleton<IBrandDal , EfBrandDal>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
