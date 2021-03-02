@@ -48,7 +48,7 @@ namespace WebAPI
             //services.AddSingleton<IColorDal, EfColorDal>();
             //services.AddSingleton<IBrandService, BrandManager>();
             //services.AddSingleton<IBrandDal , EfBrandDal>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+         
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -64,7 +64,8 @@ namespace WebAPI
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
-                });
+                }); 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             ServiceTool.Create(services);
         }
 
@@ -80,6 +81,7 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
             app.UseAuthentication();
 
             app.UseAuthorization();

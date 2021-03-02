@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -25,7 +26,8 @@ namespace Business.Concrete
          
         }
 
-
+        [SecuredOperation("carimage.add,admin")]
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add( CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfCountOfCarImagesCorrect(carImage.Id));

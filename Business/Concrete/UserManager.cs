@@ -23,6 +23,7 @@ namespace Business.Concrete
         }
 
 
+        [SecuredOperation("user.update,admin")]
         [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
