@@ -23,29 +23,28 @@ namespace Business.Concrete
         }
 
 
-        [SecuredOperation("user.update,admin")]
-        [ValidationAspect(typeof(UserValidator))]
-        public IResult Add(User user)
+        //[ValidationAspect(typeof(UserValidator))]
+        public void Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult(Messages.UserAdded);
+  
         }
 
-        public IResult Delete(User user)
+        public void Delete(User user)
         {
             _userDal.Delete(user);
-            return new SuccessResult(Messages.UserDeleted);
+    
         }
 
-        public IDataResult<List<User>> GetAll()
+        public List<User> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.UserListed);
+            return _userDal.GetAll();
         }
 
-        public IResult Update(User user)
+        public void Update(User user)
         {
             _userDal.Update(user);
-            return new SuccessResult(Messages.UserUpdated);
+            
         }
 
         public List<OperationClaim> GetClaims(User user)
@@ -58,5 +57,6 @@ namespace Business.Concrete
             return _userDal.Get(u => u.Email == email);
         }
 
+       
     }
 }

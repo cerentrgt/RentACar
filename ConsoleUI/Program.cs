@@ -23,7 +23,7 @@ namespace ConsoleUI
             }
             
 
-            foreach (var user in userManager.GetAll().Data)
+            foreach (var user in userManager.GetAll())
             {
                 Console.WriteLine(user.FirstName+"/"+user.LastName);
             }
