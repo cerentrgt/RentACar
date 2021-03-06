@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,7 +20,7 @@ namespace WebAPI.Controllers
         {
             _authService = authService;
         }
-
+        
         [HttpPost("login")]
         public ActionResult Login(UserForLoginDto userForLoginDto)
         {
