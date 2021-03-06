@@ -8,12 +8,12 @@ namespace Business.Abstract
 {
     public interface IUserService
     {
-        List<User> GetAll();
-        List<OperationClaim> GetClaims(User user);
-        User GetByMail(string email); 
-        void Add(User user);
-        void Update(User user);
-        void Delete(User user);
+        IDataResult<List<User>> GetAll();
+        IDataResult<List<OperationClaim>> GetClaims(User user);
+        IDataResult<User> GetByMail(string email); 
+        IResult Add(User user);
+        IResult Update(User user);
+        IResult Delete(User user);
       
     }
 }
