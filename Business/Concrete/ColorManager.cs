@@ -20,8 +20,8 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        [SecuredOperation("color.add,admin")]
-        [ValidationAspect(typeof(ColorValidator))]
+        //[SecuredOperation("color.add,admin")]
+        //[ValidationAspect(typeof(ColorValidator))]
         public IDataResult<List<Color>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Color>>( _colorDal.GetAll(c=>c.ColorId==id));

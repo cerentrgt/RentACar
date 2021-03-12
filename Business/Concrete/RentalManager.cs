@@ -22,8 +22,8 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
-        [SecuredOperation("rental.add,admin")]
-        [ValidationAspect(typeof(RentalValidator))]
+        //[SecuredOperation("rental.add,admin")]
+        //[ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
             _rentalDal.Add(rental);

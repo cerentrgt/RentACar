@@ -21,8 +21,8 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
-        [SecuredOperation("customer.add,admin")]
-        [ValidationAspect(typeof(CustomerValidator))]
+        //[SecuredOperation("customer.add,admin")]
+        //[ValidationAspect(typeof(CustomerValidator))]
         public IDataResult<List<Customer>> GetAll()
         {
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
