@@ -8,6 +8,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -32,6 +33,12 @@ namespace Business.Concrete
         {
             _colorDal.Add(color);
             return new SuccessResult(Messages.ColorAdded);
+        }
+
+
+        public IDataResult<List<Color>> GetAll()
+        {
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll().ToList());
         }
     }
 }

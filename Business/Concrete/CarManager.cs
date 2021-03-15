@@ -55,7 +55,7 @@ namespace Business.Concrete
         }
 
 
-        public IDataResult<List<CarDetailDto>> GetCarDetials()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetials());
         }
@@ -89,5 +89,25 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarUpdated);
         }
 
+
+        [CacheAspect]
+        public IDataResult<List<Car>> GetCarsByBrandId(int BrandId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == BrandId));
+        }
+
+        [CacheAspect]
+        public IDataResult<List<Car>> GetCarsByColorId(int ColorId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == ColorId));
+        }
+        [CacheAspect]
+        public IDataResult<List<CarDetailDto>> GetCarDetailById(int carId)
+        {
+
+
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetials(p => p.Id == carId));
+
+        }
     }
 }

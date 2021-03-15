@@ -6,6 +6,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -34,6 +35,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Brand>>( _brandDal.GetAll(b=>b.BrandId==id));
         }
 
-        
+        public IDataResult<List<Brand>> GetAll()
+        {
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll().ToList());
+        }
     }
 }
