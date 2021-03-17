@@ -9,8 +9,7 @@ namespace Business.Abstract
 {
     public interface IColorService
     {
-        IDataResult<List<Color>> GetAll();
-       IDataResult<List<Color>> GetCarsByColorId(int id);
+        IDataResult<List<Color>> GetAllColors();
        IResult Add(Color color);
     }
 }

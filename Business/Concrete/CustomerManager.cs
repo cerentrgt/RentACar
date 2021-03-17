@@ -22,7 +22,7 @@ namespace Business.Concrete
         }
 
         //[SecuredOperation("customer.add,admin")]
-        //[ValidationAspect(typeof(CustomerValidator))]
+        [ValidationAspect(typeof(CustomerValidator))]
         public IDataResult<List<Customer>> GetAll()
         {
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());

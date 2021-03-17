@@ -23,7 +23,7 @@ namespace Business.Concrete
         }
 
         //[SecuredOperation("rental.add,admin")]
-        //[ValidationAspect(typeof(RentalValidator))]
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
             _rentalDal.Add(rental);

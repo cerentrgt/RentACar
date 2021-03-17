@@ -30,14 +30,9 @@ namespace Business.Concrete
                 
         }
 
-        public IDataResult<List<Brand>> GetCarsByBrandId(int id)
+        public IDataResult<List<Brand>> GetAllBrands()
         {
-            return new SuccessDataResult<List<Brand>>( _brandDal.GetAll(b=>b.BrandId==id));
-        }
-
-        public IDataResult<List<Brand>> GetAll()
-        {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll().ToList());
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
     }
 }

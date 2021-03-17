@@ -17,7 +17,7 @@ namespace ConsoleUI
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             
-            foreach (var car in carManager.GetCarDetails().Data)
+            foreach (var car in carManager.GetCarDetail().Data)
             {
                 Console.WriteLine(car.ColorName+"/"+car.BrandName);
             }

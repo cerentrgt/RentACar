@@ -31,22 +31,11 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getcarsbycolorid")]
-        public IActionResult GetCarsByColorId(int id)
-        {
-            var result = _colorService.GetCarsByColorId(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+        [HttpGet("getallcolors")]
 
-        [HttpGet("getall")]
-
-        public IActionResult GetAll()
+        public IActionResult GetAllColors()
         {
-            var result = _colorService.GetAll();
+            var result = _colorService.GetAllColors();
             if (result.Success)
             {
                 return Ok(result);

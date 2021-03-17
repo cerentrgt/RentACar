@@ -18,16 +18,7 @@ namespace WebAPI.Controllers
         {
             _brandService = brandService;
         }
-        [HttpGet("getcarsbybrandid")]
-        public IActionResult GetCarsByBrandId(int id)
-        {
-            var result = _brandService.GetCarsByBrandId(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+    
         [HttpPost("add")]
         public IActionResult Add(Brand brand)
         {
@@ -39,11 +30,11 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getall")]
+        [HttpGet("getallbrands")]
 
-        public IActionResult GetAll()
+        public IActionResult GetAllBrands()
         {
-            var result = _brandService.GetAll();
+            var result = _brandService.GetAllBrands();
             if (result.Success)
             {
                 return Ok(result);

@@ -22,10 +22,10 @@ namespace Business.Concrete
         }
 
         //[SecuredOperation("color.add,admin")]
-        //[ValidationAspect(typeof(ColorValidator))]
-        public IDataResult<List<Color>> GetCarsByColorId(int id)
+        [ValidationAspect(typeof(ColorValidator))]
+        public IDataResult<List<Color>> GetAllColors()
         {
-            return new SuccessDataResult<List<Color>>( _colorDal.GetAll(c=>c.ColorId==id));
+            return new SuccessDataResult<List<Color>>( _colorDal.GetAll());
         }
 
         [ValidationAspect(typeof(ColorManager))]
@@ -33,12 +33,6 @@ namespace Business.Concrete
         {
             _colorDal.Add(color);
             return new SuccessResult(Messages.ColorAdded);
-        }
-
-
-        public IDataResult<List<Color>> GetAll()
-        {
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll().ToList());
         }
     }
 }
