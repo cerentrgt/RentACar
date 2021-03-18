@@ -38,5 +38,8 @@ namespace Business.Constants
         public static string SuccessfulLogin = "Başarılı giriş.";
         public static string UserRegistered = "Kayıt oldu.";
         public static string AccessTokenCreated = "Token oluşturuldu.";
+        public static string CarImagesDeleted = "Araç resimleri silindi!";
+        public static string CarImageNotFound = "Araç resmi bulunamadı!";
+        public static string CarImageCountExceeded = "Bir araca maksimum 5 resim eklenebilir!";
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -14,69 +14,66 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CarImagesController : ControllerBase
     {
-        public static IWebHostEnvironment _webHostEnvironment;
         ICarImageService _carImageService;
-
-        public CarImagesController(ICarImageService carImageService,IWebHostEnvironment webHostEnvironment)
+        public CarImagesController(ICarImageService carImageService)
         {
             _carImageService = carImageService;
-            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpPost("add")]
-        public string Add([FromForm] CarImages objectFile)
+        public IActionResult Add([FromForm] CarImagesDto carImagesDto)
         {
-            try
-            {
-                if (objectFile.files.Length > 0)
-                {
-                    string path = _webHostEnvironment.WebRootPath + "\\uploads\\";
-                    if (!Directory.Exists(path))
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-                    using (FileStream fileStream = System.IO.File.Create(path + objectFile.files.FileName))
-                    {
-                        objectFile.files.CopyTo(fileStream);
-                        fileStream.Flush();
-                        return "Yüklendi.";
-                    }
-                }
-                else
-                {
-                    return "Resim yüklenemedi..";
-                }
-            }
-            catch (Exception ex)
-            {
-
-                return ex.Message;
-            }
+            var result = _carImageService.Add(carImagesDto);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
         }
 
+        [HttpPost("update")]
+        public IActionResult Update([FromForm] CarImagesDto carImagesDto)
+        {
+            var result = _carImageService.Update(carImagesDto);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Delete(CarImagesDto carImagesDto)
+        {
+            var result = _carImageService.Delete(carImagesDto);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
+        }
+
+        [HttpPost("deletebycarid")]
+        public IActionResult DeleteByCarId(int carId)
+        {
+            var result = _carImageService.DeleteByCarId(carId);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
+        }
 
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _carImageService.Get(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            var result = _carImageService.GetById(id);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
         }
 
-        [HttpGet("getall")]
-        public IActionResult GetAll()
+        [HttpGet("getbycarid")]
+        public IActionResult GetByCarId(int carId)
+        {
+            var result = _carImageService.GetByCarId(carId);
+            if (!result.Success) return BadRequest();
+            return Ok(result);
+        }
+
+        [HttpGet("getlist")]
+        public IActionResult GetList()
         {
             var result = _carImageService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            if (!result.Success) return BadRequest(result);
+            return Ok(result);
         }
-
-
     }
 }
