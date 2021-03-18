@@ -93,12 +93,12 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.ColorId==colorId));
+            return new SuccessDataResult<List<Car>>(_carDal.GetCarsByColorId(colorId));
         }
         [CacheAspect]
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.BrandId==brandId));
+            return new SuccessDataResult<List<Car>>(_carDal.GetCarsByBrandId(brandId));
         }
 
         public IDataResult<List<Car>> GetCarsById(int carId)
