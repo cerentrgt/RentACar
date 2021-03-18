@@ -2,6 +2,7 @@ using Business.Abstract;
 using Business.Concrete;
 using Core.DependencyResolvers;
 using Core.Extensions;
+using Core.Utilities.FileOperations;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.Encryption;
 using Core.Utilities.Security.JWT;
@@ -37,6 +38,7 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            FileOperations.ImagePath = Configuration["Paths:ImagesPath"];
             services.AddControllers();
             services.AddCors();
          
@@ -58,6 +60,8 @@ namespace WebAPI
                 });
             services.AddDependencyResolvers(new ICoreModule[] { 
             new CoreModule()});
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -28,8 +28,8 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-        [SecuredOperation("carimage.add")]
-        [ValidationAspect(typeof(CarImageValidator))]
+        //[SecuredOperation("carimage.add")]
+        //[ValidationAspect(typeof(CarImageValidator))]
         [CancellationTokenAspect]
         public IResult Add(CarImagesDto carImagesDto)
         {
