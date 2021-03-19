@@ -17,16 +17,16 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (OtoKiralamaContext context=new OtoKiralamaContext())
             {
-                var result = from c in context.Cars 
+                var result = from c in context.Cars
                              join b in context.Brands
                              on c.BrandId equals b.BrandId
                              join p in context.Colors
                              on c.ColorId equals p.ColorId
                              select new CarDetailDto {
-                                 Id = c.Id, 
+                                 Id = c.Id,
                                  BrandName = b.BrandName,
-                                 ColorId=p.ColorId,
-                                 BrandId=b.BrandId,
+                                 ColorId=c.ColorId,
+                                 BrandId=c.BrandId,
                                  ModelYears=c.ModelYears,
                                  DailyPrice = c.DailyPrice,
                                  Descriptions=c.Descriptions,

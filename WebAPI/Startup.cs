@@ -38,7 +38,7 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            FileOperations.ImagePath = Configuration["Paths:ImagesPath"];
+            FileOperations.imagePath = Configuration["Paths:imagesPath"];
             services.AddControllers();
             services.AddCors();
          

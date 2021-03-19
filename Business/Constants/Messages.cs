@@ -41,5 +41,9 @@ namespace Business.Constants
         public static string CarImagesDeleted = "Araç resimleri silindi!";
         public static string CarImageNotFound = "Araç resmi bulunamadı!";
         public static string CarImageCountExceeded = "Bir araca maksimum 5 resim eklenebilir!";
+        public static string GetSuccessCarMessage = "Araç bilgisi / bilgileri getirildi.";
+        public static string GetErrorCarMessage = "Araç bilgisi / bilgileri getirilemedi.";
+        public static string InsufficientBalance = "Yetersiz bakiye";
+        public static string PaymentCompleted = "Ödeme yapıldı";
     }
 }

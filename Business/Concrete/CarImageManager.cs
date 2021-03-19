@@ -45,7 +45,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageAdded);
         }
 
-        [SecuredOperation("carimage.update")]
+        //[SecuredOperation("carimage.update")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(CarImagesDto carImagesDto)
         {
@@ -58,7 +58,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
-        [SecuredOperation("carimage.delete")]
+        //[SecuredOperation("carimage.delete")]
         public IResult Delete(CarImagesDto carImagesDto)
         {
             var result = _carImageDal.Get(ci => ci.Id == carImagesDto.Id);
