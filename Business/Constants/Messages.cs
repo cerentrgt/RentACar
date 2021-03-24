@@ -12,7 +12,7 @@ namespace Business.Constants
         public static string CarAdded = " Araç kayıt işlemi başarılı ";
          public static string CarDeleted = " Araç silme işlemi başarılı ";
         public static string CarUpdated = " Araç güncelleme işlemi başarılı ";
-        public static string BrandAdded = " Marka kayıt işlemi başarılı ";
+        public static string BrandUpdated = " Marka kayıt işlemi başarılı ";
         public static string RentalAdded = " Kiralama işlemi başarılı ";
         public static string CustomerUpdated = "Müşteri guncelleme işlemi başarılı ";
         public static string CustomerDeleted = " Müşteri silme işlemi başarılı ";
@@ -45,5 +45,10 @@ namespace Business.Constants
         public static string GetErrorCarMessage = "Araç bilgisi / bilgileri getirilemedi.";
         public static string InsufficientBalance = "Yetersiz bakiye";
         public static string PaymentCompleted = "Ödeme yapıldı";
+
+        public static string ColorUpdated = "Renginiz güncellendi";
+
+        public static string BrandAdded = "Marka eklendi.";
+        public static string BrandDelete = "Marka silindii..";
     }
 }

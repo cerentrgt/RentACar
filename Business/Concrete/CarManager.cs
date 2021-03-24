@@ -26,16 +26,18 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        [SecuredOperation("car.add,admin")]
+        //[SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
-        [CacheRemoveAspect("ICarService.Get")]
+        //[CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
+            _carDal.Add(car);
             return new  SuccessResult(Messages.CarAdded);
         }
      
         public IResult Delete(Car car)
         {
+            _carDal.Delete(car);
             return new SuccessResult(Messages.CarDeleted);
         }
 
@@ -64,6 +66,7 @@ namespace Business.Concrete
  
         public IResult Update(Car car)
         {
+            _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
 
         }
@@ -82,7 +85,7 @@ namespace Business.Concrete
             return null;
         }
 
-        [TransactionScopeAspect]
+        //[TransactionScopeAspect]
         public IResult TransactionalOperation(Car car)
         {
             _carDal.Update(car);
@@ -101,9 +104,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetCarsByBrandId(brandId));
         }
 
-        public IDataResult<List<Car>> GetCarsById(int carId)
+        public IDataResult<Car> GetById(int carId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.Id==carId));
+            return new SuccessDataResult<Car>(_carDal.Get(c=>c.Id==carId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetailById(int id)

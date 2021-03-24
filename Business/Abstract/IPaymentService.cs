@@ -1,4 +1,5 @@
-﻿using Core.Utilities.Results;
+﻿using Core.Entities.Concrete.Fake;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,6 @@ namespace Business.Abstract
 {
     public interface IPaymentService
     {
-        IResult ReceivePayment(Payment payment);
+        IResult MakePayment(IPaymentModel paymentModel);
     }
 }

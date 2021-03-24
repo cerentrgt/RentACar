@@ -22,8 +22,8 @@ namespace DataAccess.Concrete.EntityFramework
                              on c.BrandId equals b.BrandId
                              join p in context.Colors
                              on c.ColorId equals p.ColorId
-                             select new CarDetailDto {
-                                 Id = c.Id,
+                             select new CarDetailDto { 
+                                 Id=c.Id,
                                  BrandName = b.BrandName,
                                  ColorId=c.ColorId,
                                  BrandId=c.BrandId,
@@ -33,7 +33,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName=p.ColorName,
                                  
                              };
-                return filter == null ? result.ToList() : result.Where(filter).ToList();
+                return result.ToList() ;
             }
         }
 

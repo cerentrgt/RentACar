@@ -24,8 +24,31 @@ namespace DataAccess.Concrete.EntityFramework
                              join us in context.Users
                              on cus.UserId equals us.Id
                              select new RentalDetailDto
-                             {Id=ca.Id,CompanyName=cus.CompanyName,RentDate=r.RentDate,ReturnDate=r.ReturnDate
+                             {Id=ca.Id,CompanyName=cus.CompanyName
                              ,FirstName=us.FirstName};
+                return result.ToList();
+            }
+        }
+
+        public List<RentalDetailDto> GetRentalDetailsById(int id)
+        {
+            using (OtoKiralamaContext context = new OtoKiralamaContext())
+            {
+                var result =
+                    from r in context.Rentals.Where(c => c.CarId == id)
+                    join c in context.Cars on r.CarId equals c.Id
+                    join cu in context.Customers on r.CustomerId equals cu.Id
+                    join b in context.Brands on c.BrandId equals b.BrandId
+                    join u in context.Users on cu.UserId equals u.Id
+                    select new RentalDetailDto
+                    {
+                        Id = r.Id,
+                        CarId = c.Id,
+                        BrandName = b.BrandName,
+                        CustomerName = cu.CompanyName,
+                        UserName = $"{u.FirstName} {u.LastName}",
+                      
+                    };
                 return result.ToList();
             }
         }

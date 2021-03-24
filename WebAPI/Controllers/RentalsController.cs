@@ -35,17 +35,29 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getrentaldetailsdto")]
-        public IActionResult GetRentalDetailsDto()
+        [HttpGet("getrentaldetails")]
+        public IActionResult GetRentalDetails()
         {
-            var result = _rentalService.GetRentalDetailsDto();
+            var result = _rentalService.GetRentalDetails();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-           
+
+        [HttpGet("detailsbycar")]
+        public IActionResult GetRentalByCar(int id)
+        {
+
+            var result = _rentalService.GetRentalDetailsById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
 
         [HttpPost("add")]
         public IActionResult Add(Rental rental)
@@ -80,23 +92,22 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        
-        public ActionResult PaymentAdd(RentalPaymentDto rentalPaymentDto)
+
+        [HttpPost("paymentadd")]
+        public IActionResult PaymentAdd(RentalPaymentDto rentalPaymentDto)
         {
-            var paymentResult = _paymentService.ReceivePayment(rentalPaymentDto.Payment);
+            var paymentResult = _paymentService.MakePayment(rentalPaymentDto.FakeCreditCardModel);
             if (!paymentResult.Success)
             {
                 return BadRequest(paymentResult);
             }
+            rentalPaymentDto.Rental.RentDate = DateTime.Now;
             var result = _rentalService.Add(rentalPaymentDto.Rental);
 
             if (result.Success)
                 return Ok(result);
-            else
-            {
-                throw new System.Exception(result.Message);
-                //return BadRequest(result);                    
-            }
+
+            return BadRequest(result.Message);
         }
     }
 }

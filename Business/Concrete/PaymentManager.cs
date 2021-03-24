@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concrete.Fake;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using System;
@@ -11,13 +12,10 @@ namespace Business.Concrete
 
     public class PaymentManager : IPaymentService
     {
-        public IResult ReceivePayment(Payment payment)
+        
+        public IResult MakePayment(IPaymentModel paymentModel)
         {
-            if (payment.Amount > 5000)
-            {
-                return new ErrorResult(Messages.InsufficientBalance);
-            }
-            return new SuccessResult(Messages.PaymentCompleted);
+            return new SuccessResult();
         }
     }
 }
