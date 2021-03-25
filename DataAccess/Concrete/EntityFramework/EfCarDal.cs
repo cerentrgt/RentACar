@@ -33,7 +33,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ColorName=p.ColorName,
                                  
                              };
-                return result.ToList() ;
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
 

@@ -14,43 +14,32 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public List<RentalDetailDto> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
         {
-            using (OtoKiralamaContext context=new OtoKiralamaContext())
+            using (OtoKiralamaContext context = new OtoKiralamaContext())
             {
-                var result = from r in filter is null ? context.Rentals : context.Rentals.Where(filter)
-                             join ca in context.Cars
-                             on r.CarId equals ca.Id
-                             join cus in context.Customers
-                             on r.CustomerId equals cus.Id
-                             join us in context.Users
-                             on cus.UserId equals us.Id
+
+                var result = from r in context.Rentals
+                             join c in context.Cars
+                             on r.CarId equals c.Id
+                             join b in context.Brands
+                             on c.BrandId equals b.BrandId
+                             join cu in context.Customers
+                             on r.CustomerId equals cu.Id
+                             join u in context.Users
+                             on cu.UserId equals u.Id
                              select new RentalDetailDto
-                             {Id=ca.Id,CompanyName=cus.CompanyName
-                             ,FirstName=us.FirstName};
+                             {
+                                 Id = r.Id,
+                                 CarId=r.CarId,
+                                 CompanyName=cu.CompanyName,
+                                 BrandName = b.BrandName,
+                                 FirstName = u.FirstName,
+                                 LastName = u.LastName,
+                                 RentDate = r.RentDate,
+                                 ReturnDate = r.ReturnDate,
+                             };
                 return result.ToList();
             }
         }
 
-        public List<RentalDetailDto> GetRentalDetailsById(int id)
-        {
-            using (OtoKiralamaContext context = new OtoKiralamaContext())
-            {
-                var result =
-                    from r in context.Rentals.Where(c => c.CarId == id)
-                    join c in context.Cars on r.CarId equals c.Id
-                    join cu in context.Customers on r.CustomerId equals cu.Id
-                    join b in context.Brands on c.BrandId equals b.BrandId
-                    join u in context.Users on cu.UserId equals u.Id
-                    select new RentalDetailDto
-                    {
-                        Id = r.Id,
-                        CarId = c.Id,
-                        BrandName = b.BrandName,
-                        CustomerName = cu.CompanyName,
-                        UserName = $"{u.FirstName} {u.LastName}",
-                      
-                    };
-                return result.ToList();
-            }
-        }
     }
 }

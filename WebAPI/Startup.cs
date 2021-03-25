@@ -38,7 +38,7 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            FileOperations.imagePath = Configuration["Paths:imagesPath"];
+           
             services.AddControllers();
             services.AddCors();
          
@@ -74,11 +74,13 @@ namespace WebAPI
 
             app.ConfigureCustomExceptionMiddleware();
 
-            app.UseCors(builder=>builder.WithOrigins("http://localhost:4201").AllowAnyHeader());
+            app.UseCors(builder=>builder.WithOrigins("https://localhost:44308").AllowAnyHeader().AllowAnyOrigin());
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseStaticFiles();
 
             app.UseAuthentication();
 

@@ -85,11 +85,7 @@ namespace Business.Concrete
         public IDataResult<List<CarImage>> GetByCarId(int carId)
         {
             var result = _carImageDal.GetAll(ci => ci.CarId == carId);
-            if (result.Any()) return new SuccessDataResult<List<CarImage>>(result);
-            return new SuccessDataResult<List<CarImage>>(new List<CarImage>
-            {
-                new CarImage{  CarId = carId,  ImagePath = "default.jpg", Date = DateTime.Now }
-            });
+            return new SuccessDataResult<List<CarImage>>(result);
         }
 
         public IDataResult<List<CarImage>> GetAll()

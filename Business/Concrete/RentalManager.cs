@@ -3,6 +3,7 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Entities.Concrete.Fake;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -53,6 +54,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
 
+        public IResult MakePayment(FakeCreditCardModel fakeCreditCardModel)
+        {
+            return new SuccessResult();
+        }
 
         public IResult Update(Rental rental)
         {
@@ -60,9 +65,6 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentaUpdated);
         }
 
-        public IDataResult<List<RentalDetailDto>> GetRentalDetailsById(int id)
-        {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetailsById(id));
-        }
+       
     }
 }
